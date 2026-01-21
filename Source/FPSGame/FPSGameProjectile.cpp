@@ -26,7 +26,7 @@ AFPSGameProjectile::AFPSGameProjectile()
 	CollisionComp->BodyInstance.SetCollisionProfileName("Projectile");
 	CollisionComp->OnComponentHit.AddDynamic(this, &AFPSGameProjectile::OnHit);		// set up a notification for when this component hits something blocking
 
-	// 重要：设置正确的复制条件
+	// 设置正确的复制条件
 	CollisionComp->SetIsReplicated(true);
 
 	// 只在服务器上注册碰撞事件
@@ -50,7 +50,7 @@ AFPSGameProjectile::AFPSGameProjectile()
 	ProjectileMovement->bRotationFollowsVelocity = true;
 	ProjectileMovement->bShouldBounce = true;
 
-	// 重要：优化网络运动复制
+	// 优化网络运动复制
 	ProjectileMovement->SetIsReplicated(true);
 	ProjectileMovement->SetNetAddressable(); // 允许网络寻址
 
@@ -86,7 +86,7 @@ void AFPSGameProjectile::BeginPlay()
 
 void AFPSGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	// 关键：只在服务器上处理伤害逻辑
+	// 只在服务器上处理伤害逻辑
 	if (GetLocalRole() != ROLE_Authority)
 	{
 		return;
@@ -168,7 +168,7 @@ void AFPSGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 		// 命中PhysicsActor预设的实体：立即销毁
 		if (OtherComp && OtherComp->GetCollisionProfileName() == FName("PhysicsActor"))
 		{
-			// 添加物理冲量（如果需要对PhysicsActor施加力）
+			// 添加物理冲量（对PhysicsActor施加力）
 			if (OtherComp->IsSimulatingPhysics())
 			{
 				OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
@@ -196,7 +196,7 @@ void AFPSGameProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 		}
 
-		// 播放命中特效/音效（可选，模板若有则添加）
+		// 播放命中特效/音效
 		// UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
 		// UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, GetActorLocation());
 
@@ -208,6 +208,6 @@ void AFPSGameProjectile::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	// 复制DamageAmount（如果需要）
+	// 复制DamageAmount
 	DOREPLIFETIME(AFPSGameProjectile, DamageAmount);
 }

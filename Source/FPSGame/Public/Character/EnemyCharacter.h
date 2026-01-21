@@ -55,17 +55,11 @@ protected:
     // 定时器句柄
     FTimerHandle AttackCollisionTimerHandle;
 
-    //// 感知更新回调
-    //UFUNCTION()
-    //void OnPerceptionUpdated(const TArray<AActor*>& UpdatedActors);
 
     // 攻击碰撞重叠回调
     UFUNCTION()
     void OnAttackCollisionOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-    //// 移动到目标（蓝图/代码均可调用，适配AAIController）
-    //UFUNCTION(BlueprintCallable, Category = "AI|Movement")
-    //void MoveToTarget(AActor* TargetActor);
 
     //寻找有效攻击玩家
     UFUNCTION(BlueprintCallable, Category = "AI|Targeting")
@@ -115,7 +109,7 @@ private:
     // 上次攻击时间
     float LastAttackTime;
 
-    // 新增：当前锁定的玩家目标
+    // 当前锁定的玩家目标
     UPROPERTY()
     AFPSGameCharacter* CurrentTargetPlayer;
 

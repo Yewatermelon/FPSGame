@@ -162,19 +162,6 @@ void AEnemyCharacter::AttackTarget()
 }
 
 
-//void AEnemyCharacter::SetTargetActor(AActor* NewTarget)
-//{
-//    if (GetLocalRole() == ROLE_Authority)
-//    {
-//        TargetActor = NewTarget;
-//    }
-//}
-//
-//void AEnemyCharacter::OnRep_TargetActor()
-//{
-//    // 目标变更时的处理
-//}
-
 // 重写TakeDamage，接收子弹的ApplyDamage调用
 float AEnemyCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
@@ -331,5 +318,4 @@ void AEnemyCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
     // 声明需要同步的属性（根据实际需求添加，例如生命值）
     DOREPLIFETIME(AEnemyCharacter, CurrentHealth);
     DOREPLIFETIME(AEnemyCharacter, bIsDead);
-    // 如果有其他Replicated属性，继续添加DOREPLIFETIME
 }

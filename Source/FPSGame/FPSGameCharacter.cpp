@@ -197,7 +197,7 @@ float AFPSGameCharacter::TakeDamage(float DamageAmount, struct FDamageEvent cons
 	return ActualDamage;
 }
 
-// 新增：死亡处理
+// 死亡处理
 void AFPSGameCharacter::OnDeath()
 {
 	UE_LOG(LogTemplateCharacter, Warning, TEXT("%s 死亡，最终血量: %.0f/%.0f"),
@@ -235,13 +235,14 @@ void AFPSGameCharacter::OnRep_CurrentHealth()
 	}
 }
 
-// 新增：网络同步设置
+// 网络同步设置
 void AFPSGameCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AFPSGameCharacter, CurrentHealth);
 }
 
+//网络调试
 void AFPSGameCharacter::DebugNetworkInfo()
 {
 	UE_LOG(LogTemplateCharacter, Warning, TEXT("=== 网络信息调试 ==="));

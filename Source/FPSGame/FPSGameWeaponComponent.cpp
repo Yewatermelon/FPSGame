@@ -27,52 +27,7 @@ UFPSGameWeaponComponent::UFPSGameWeaponComponent()
 	Character = nullptr;
 }
 
-
-//void UFPSGameWeaponComponent::Fire()
-//{
-//	if (Character == nullptr || Character->GetController() == nullptr)
-//	{
-//		return;
-//	}
-//
-//	// Try and fire a projectile
-//	if (ProjectileClass != nullptr)
-//	{
-//		UWorld* const World = GetWorld();
-//		if (World != nullptr)
-//		{
-//			APlayerController* PlayerController = Cast<APlayerController>(Character->GetController());
-//			const FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
-//			// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
-//			const FVector SpawnLocation = GetOwner()->GetActorLocation() + SpawnRotation.RotateVector(MuzzleOffset);
-//	
-//			//Set Spawn Collision Handling Override
-//			FActorSpawnParameters ActorSpawnParams;
-//			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
-//	
-//			// Spawn the projectile at the muzzle
-//			World->SpawnActor<AFPSGameProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
-//		}
-//	}
-//	
-//	// Try and play the sound if specified
-//	if (FireSound != nullptr)
-//	{
-//		UGameplayStatics::PlaySoundAtLocation(this, FireSound, Character->GetActorLocation());
-//	}
-//	
-//	// Try and play a firing animation if specified
-//	if (FireAnimation != nullptr)
-//	{
-//		// Get the animation object for the arms mesh
-//		UAnimInstance* AnimInstance = Character->GetMesh1P()->GetAnimInstance();
-//		if (AnimInstance != nullptr)
-//		{
-//			AnimInstance->Montage_Play(FireAnimation, 1.f);
-//		}
-//	}
-//}
-
+// 执行射击
 void UFPSGameWeaponComponent::Fire()
 {
 	if (Character == nullptr || Character->GetController() == nullptr)
@@ -378,7 +333,6 @@ void UFPSGameWeaponComponent::InitializeNetworkOwnership(AFPSGameCharacter* Owne
 	// 确保组件有正确的网络设置
 	if (GetNetMode() != NM_Standalone)
 	{
-		// 对于组件，我们需要确保它的父Actor（角色）正确处理RPC
 		// 设置组件的网络复制
 		SetIsReplicated(true);
 

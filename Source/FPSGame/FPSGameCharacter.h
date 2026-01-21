@@ -48,7 +48,7 @@ class AFPSGameCharacter : public ACharacter
 public:
 	AFPSGameCharacter();
 
-	//重写AActor的TakeDamage函数（标准方式）
+	//重写AActor的TakeDamage函数
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 		class AController* EventInstigator, AActor* DamageCauser) override;
 
@@ -65,7 +65,7 @@ protected:
 
 private:
 
-	// 新增：生命值属性
+	// 生命值属性
 	UPROPERTY(EditAnywhere, Category = "Health", meta = (AllowPrivateAccess = "true"))
 	float MaxHealth = 200.0f;
 
@@ -75,7 +75,7 @@ private:
 	UFUNCTION()
 	void OnRep_CurrentHealth();
 
-	// 新增：死亡处理
+	// 死亡处理
 	void OnDeath();
 protected:
 	/** Called for movement input */
